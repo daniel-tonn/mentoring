@@ -33,6 +33,13 @@
                 <version>1.6.1</version>
             </dependency>
 
+            <dependency>
+                <groupId>hsqldb</groupId>
+                <artifactId>hsqldb</artifactId>
+                <version>1.8.0.2</version>
+                <type>jar</type>
+                <scope>test</scope>
+            </dependency>
 
 <!--
             <dependency>
@@ -70,6 +77,10 @@
             <artifactId>junit</artifactId>
             <version>4.8.2</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
         </dependency>
 
     </dependencies>
