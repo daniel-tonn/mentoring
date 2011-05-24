@@ -12,7 +12,7 @@ public class Department
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
     @Version

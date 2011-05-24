@@ -3,21 +3,14 @@ package de.lbb.mentoring.example.model;
 import javax.persistence.*;
 
 @Entity
-public class Employee
+public class Employee extends AbstractEmployee
 {
-    @Id
-    @GeneratedValue
-    private Long id;
-
     private String name;
     private String surename;
     private int age;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Department department;
-
-    @Version
-    private Long version;
 
     public String getName() {
         return name;
@@ -50,9 +43,4 @@ public class Employee
     public void setDepartment(Department department) {
         this.department = department;
     }
-
-    public Long getId() {
-        return id;
-    }
-
 }

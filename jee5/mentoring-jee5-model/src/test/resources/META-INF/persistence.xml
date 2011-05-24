@@ -4,10 +4,14 @@
 
     <persistence-unit name="DataModel_MYSQL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>de.lbb.mentoring.example.model.AbstractEmployee</class>
         <class>de.lbb.mentoring.example.model.Employee</class>
         <class>de.lbb.mentoring.example.model.Department</class>
+        <class>de.lbb.mentoring.example.model.ParttimeEmployee</class>
+
         <properties>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.username" value="root"/>
             <property name="hibernate.connection.password" value=""/>
@@ -22,8 +26,10 @@
     <persistence-unit name="DataModel" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
+        <class>de.lbb.mentoring.example.model.AbstractEmployee</class>
         <class>de.lbb.mentoring.example.model.Employee</class>
         <class>de.lbb.mentoring.example.model.Department</class>
+        <class>de.lbb.mentoring.example.model.ParttimeEmployee</class>
 
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
