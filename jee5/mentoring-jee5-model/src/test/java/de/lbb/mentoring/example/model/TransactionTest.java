@@ -36,7 +36,7 @@ public class TransactionTest extends AbstractEntityTest
         // Will fail on hsqldb, because of lack of isolationlevel implementation
         EntityManager em2 = emf.createEntityManager();
         reloadedDepartment = em2.find(Department.class, department.getId());
-        Assert.assertNull("This one is failing if HSQLDB is used ...", reloadedDepartment);
+        Assert.assertNull("This one is failing if HSQLDB is used (here READ_UNCOMMITTED is actually used!) ...", reloadedDepartment);
 
         em.getTransaction().commit();
     }

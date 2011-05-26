@@ -4,6 +4,10 @@ import de.lbb.mentoring.example.model.Department;
 import de.lbb.mentoring.example.model.Employee;
 import de.lbb.mentoring.example.model.ParttimeEmployee;
 
+/**
+ * simple Databuilder which does not scale
+ * Better use specific builder for entities to test @see EmployeeBuilder
+ */
 public class TestdataBuilder
 {
     public static Employee createEmployee(String name, String surename) {
