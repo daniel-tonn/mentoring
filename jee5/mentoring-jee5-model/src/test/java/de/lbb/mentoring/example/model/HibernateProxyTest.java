@@ -54,7 +54,7 @@ public class HibernateProxyTest extends AbstractEntityTest
 
         // loading Employee from new EM
         EntityManager otherEM = emf.createEntityManager();
-        Query query = otherEM.createQuery("select e from AbstractEntity e where e.id = :id");
+        Query query = otherEM.createQuery("select e from Employee e where e.id = :id");
         query.setParameter("id", employee.getId());
         AbstractEntity reloadedEmployee = (AbstractEntity) query.getSingleResult();
 
