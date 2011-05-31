@@ -4,7 +4,7 @@
 
     <persistence-unit name="DataModel_MYSQL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>de.lbb.mentoring.example.model.AbstractEmployee</class>
+        <class>de.lbb.mentoring.example.model.AbstractEntity</class>
         <class>de.lbb.mentoring.example.model.Employee</class>
         <class>de.lbb.mentoring.example.model.Department</class>
         <class>de.lbb.mentoring.example.model.ParttimeEmployee</class>
@@ -26,7 +26,7 @@
     <persistence-unit name="DataModel" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>de.lbb.mentoring.example.model.AbstractEmployee</class>
+        <class>de.lbb.mentoring.example.model.AbstractEntity</class>
         <class>de.lbb.mentoring.example.model.Employee</class>
         <class>de.lbb.mentoring.example.model.Department</class>
         <class>de.lbb.mentoring.example.model.ParttimeEmployee</class>

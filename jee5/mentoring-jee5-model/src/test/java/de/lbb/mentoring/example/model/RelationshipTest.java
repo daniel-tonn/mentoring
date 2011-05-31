@@ -26,12 +26,14 @@ public class RelationshipTest extends AbstractEntityTest
         // Creating Department
         Department department = TestdataBuilder.createDepartment("Abteilung 1");
         employee.setDepartment(department);
+        em.getTransaction().begin();
         em.persist(employee);
+        em.getTransaction().commit();
 
         // loading Employee from new EM
         EntityManager otherEM = emf.createEntityManager();
         Employee reloadedEmployee = otherEM.find(Employee.class, employee.getId());
-        Assert.assertNotNull(employee.getDepartment());
+        Assert.assertNotNull(reloadedEmployee.getDepartment());
 
     }
 

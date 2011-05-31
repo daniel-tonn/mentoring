@@ -1,7 +1,9 @@
 package de.lbb.mentoring.example.model;
 
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
@@ -12,6 +14,11 @@ public class ParttimeEmployee extends Employee
     private Date fromDate;
     @Temporal(value = TemporalType.DATE)
     private Date toDate;
+
+    /**
+     * to be JPA conform
+     */
+    public ParttimeEmployee() {}
 
     public Date getFrom() {
         return fromDate;
