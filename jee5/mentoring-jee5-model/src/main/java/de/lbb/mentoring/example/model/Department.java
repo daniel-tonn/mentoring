@@ -1,5 +1,6 @@
 package de.lbb.mentoring.example.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -9,7 +10,7 @@ public class Department extends AbstractEntity
 {
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     /**

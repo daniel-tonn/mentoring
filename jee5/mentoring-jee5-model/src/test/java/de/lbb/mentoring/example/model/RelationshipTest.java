@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,9 @@ public class RelationshipTest extends AbstractEntityTest
 {
 
     /**
-     * Bidrectional relationship: handling owning side successfully
+     * Bidrectional relationship:
+     * handling owning side successfully
+     * handling inverse side with failures
      */
     @Test
     public void testEmployeeDepartment()
@@ -31,10 +34,21 @@ public class RelationshipTest extends AbstractEntityTest
         em.persist(employee);
         em.getTransaction().commit();
 
-        // loading Employee from new EM
-        EntityManager otherEM = emf.createEntityManager();
-        Employee reloadedEmployee = otherEM.find(Employee.class, employee.getId());
+        // loading Employee
+        // employee is aware about his new Department
+        Employee reloadedEmployee = em.find(Employee.class, employee.getId());
         Assert.assertNotNull(reloadedEmployee.getDepartment());
+
+
+        // Reloading the department
+        // department know nothing about its employees
+        Department reloadedDepartment = em.find(Department.class, department.getId()) ;
+        Assert.assertNull(reloadedDepartment.getEmployees());
+
+        // But loading same Department from different EM will work
+        EntityManager otherEM = emf.createEntityManager();
+        reloadedDepartment = otherEM.find(Department.class, department.getId()) ;
+        Assert.assertNotNull(reloadedDepartment.getEmployees());
 
     }
 
@@ -60,11 +74,20 @@ public class RelationshipTest extends AbstractEntityTest
         em.persist(department);
         em.getTransaction().commit();
 
-        // loading Department from new EM
+        // loading Department
+        Department reloadedDepartment = em.find(Department.class, department.getId());
+        Assert.assertNotNull(reloadedDepartment.getEmployees());
+        Assert.assertEquals(1, reloadedDepartment.getEmployees().size());
+        em.close();
+
+        // loading the Department from a new EM
         EntityManager otherEM = emf.createEntityManager();
-        Department reloadedDepartment = otherEM.find(Department.class, department.getId());
-        // Employee-Relationship not maintained by jpa
-        Assert.assertTrue("No employees expected!", reloadedDepartment.getEmployees().isEmpty());
+        reloadedDepartment = otherEM.find(Department.class, department.getId());
+        Assert.assertEquals(0, reloadedDepartment.getEmployees().size());
+
+        // ... but employees are persisted !
+        Query query = otherEM.createQuery("from Employee");
+        Assert.assertEquals(1, query.getResultList().size());
 
     }
 }
