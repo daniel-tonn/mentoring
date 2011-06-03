@@ -1,10 +1,13 @@
 package de.lbb.mentoring.example.model;
 
-import de.lbb.mentoring.example.model.testdatabuilder.TestdataBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.DepartmentBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.EmployeeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.FlushModeType;
+import javax.persistence.RollbackException;
 
 public class TransactionTest extends AbstractEntityTest
 {
@@ -15,8 +18,8 @@ public class TransactionTest extends AbstractEntityTest
     @Test
     public void testIsolationLevel()
     {
-        Employee employee = TestdataBuilder.createEmployee("Max", "Mustername");
-        Department department = TestdataBuilder.createDepartment("Abteilung 1");
+Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
+        Department department = new DepartmentBuilder().withName("Abteilung 1").build();
         em.getTransaction().begin();
 
         // From the spec:
@@ -47,7 +50,7 @@ public class TransactionTest extends AbstractEntityTest
     @Test(expected = RollbackException.class)
     public void testOptimisticLocking()
     {
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 
         // saving Employee
         em.getTransaction().begin();
@@ -83,7 +86,7 @@ public class TransactionTest extends AbstractEntityTest
     @Test
     public void testPessimisticLocking()
     {
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 
         // saving Employee
         em.getTransaction().begin();

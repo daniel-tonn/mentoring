@@ -1,6 +1,7 @@
 package de.lbb.mentoring.example.model;
 
-import de.lbb.mentoring.example.model.testdatabuilder.TestdataBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.DepartmentBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.EmployeeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,14 +18,14 @@ public class RelationshipTest extends AbstractEntityTest
     @Test
     public void testEmployeeDepartment()
     {
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
         // saving Employee
         em.getTransaction().begin();
         em.persist(employee);
         em.getTransaction().commit();
 
         // Creating Department
-        Department department = TestdataBuilder.createDepartment("Abteilung 1");
+        Department department = new DepartmentBuilder().withName("Abteilung 1").build();
         employee.setDepartment(department);
         em.getTransaction().begin();
         em.persist(employee);
@@ -44,13 +45,13 @@ public class RelationshipTest extends AbstractEntityTest
     public void testDepartmentEmployees()
     {
         // Creating Department
-        Department department = TestdataBuilder.createDepartment("Abteilung 1");
+        Department department = new DepartmentBuilder().withName("Abteilung 1").build();
         // saving Department
         em.getTransaction().begin();
         em.persist(department);
         em.getTransaction().commit();
 
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 
         List<Employee> empls = new ArrayList<Employee>();
         empls.add(employee);

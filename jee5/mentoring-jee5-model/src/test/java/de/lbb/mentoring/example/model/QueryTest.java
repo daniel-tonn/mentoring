@@ -17,8 +17,6 @@ public class QueryTest extends AbstractEntityTest
     @Test
     public void testEmployeeQueryValueObjects()
     {
-//        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
-
         // Using a builder for Entities to test
         Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 

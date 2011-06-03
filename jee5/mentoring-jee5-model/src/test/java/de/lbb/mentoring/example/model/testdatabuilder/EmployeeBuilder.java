@@ -5,9 +5,9 @@ import de.lbb.mentoring.example.model.Employee;
 
 public class EmployeeBuilder
 {
-    private String name = null;
-    private String surename = null;
-    private int age = 0;
+    protected String name = null;
+    protected String surename = null;
+    protected int age = 0;
 
     public EmployeeBuilder()
     {

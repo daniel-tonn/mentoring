@@ -1,6 +1,7 @@
 package de.lbb.mentoring.example.model;
 
-import de.lbb.mentoring.example.model.testdatabuilder.TestdataBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.DepartmentBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.PartTimeEmployeeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,14 +18,14 @@ public class HibernateProxyTest extends AbstractEntityTest
     @Test
     public void testHibernateProxy()
     {
-        Employee employee = TestdataBuilder.createParttimeEmployee("Hans", "Mueller");
+        Employee employee = new PartTimeEmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
         // saving Employee
         em.getTransaction().begin();
         em.persist(employee);
         em.getTransaction().commit();
 
         // Creating Department
-        Department department = TestdataBuilder.createDepartment("Abteilung 1");
+        Department department = new DepartmentBuilder().withName("Abteilung 1").build();
         employee.setDepartment(department);
         em.getTransaction().begin();
         em.persist(employee);
@@ -45,7 +46,7 @@ public class HibernateProxyTest extends AbstractEntityTest
     @Test
     public void testHibernateProxy2()
     {
-        Employee employee = TestdataBuilder.createParttimeEmployee("Hans", "Mueller");
+        Employee employee = new PartTimeEmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
         // saving Employee
         em.getTransaction().begin();
         em.persist(employee);

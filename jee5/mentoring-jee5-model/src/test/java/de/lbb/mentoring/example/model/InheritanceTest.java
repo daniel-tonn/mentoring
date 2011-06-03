@@ -1,6 +1,7 @@
 package de.lbb.mentoring.example.model;
 
-import de.lbb.mentoring.example.model.testdatabuilder.TestdataBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.EmployeeBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.PartTimeEmployeeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,14 +16,14 @@ public class InheritanceTest extends AbstractEntityTest
     @Test
     public void testEmployeeInheritance()
     {
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 
         // saving Employee
         em.getTransaction().begin();
         em.persist(employee);
         em.getTransaction().commit();
 
-        Employee parttimeEmployee = TestdataBuilder.createParttimeEmployee("Peter", "Schneider");
+        Employee parttimeEmployee = new PartTimeEmployeeBuilder().withAge(25).withName("Peter").withSurename("Schneider").build();
 
         // saving Employee
         em.getTransaction().begin();

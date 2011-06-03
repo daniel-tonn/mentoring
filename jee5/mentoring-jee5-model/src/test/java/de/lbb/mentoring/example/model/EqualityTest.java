@@ -1,10 +1,10 @@
 package de.lbb.mentoring.example.model;
 
-import javax.persistence.EntityManager;
-
-import de.lbb.mentoring.example.model.testdatabuilder.TestdataBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.EmployeeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
+
+import javax.persistence.EntityManager;
 
 public class EqualityTest extends AbstractEntityTest
 {
@@ -15,7 +15,7 @@ public class EqualityTest extends AbstractEntityTest
     @Test
     public void testEmployeeIdentity()
     {
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 
         // saving Employee
         em.getTransaction().begin();
@@ -40,9 +40,9 @@ public class EqualityTest extends AbstractEntityTest
      * Showing equality problem when loading same entity from different em
      */
     @Test
-    public void testEmployeeAttachDetechment()
+    public void testEmployeeAttachDetachment()
     {
-        Employee employee = TestdataBuilder.createEmployee("Hans", "Mueller");
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
 
         // saving Employee
         em.getTransaction().begin();
