@@ -13,7 +13,29 @@
     <artifactId>mentoring-jee6-model</artifactId>
     <name>Mentoring Model</name>
     <version>1.0-SNAPSHOT</version>
+<!--
+    <build>
+        <plugins>
+            <plugin>
+                 <groupId>com.mysema.maven</groupId>
+                 <artifactId>maven-apt-plugin</artifactId>
+                 <version>1.0</version>
+                 <executions>
+                   <execution>
+                     <goals>
+                       <goal>process</goal>
+                     </goals>
+                     <configuration>
+                       <outputDirectory>target/generated-sources/java</outputDirectory>
+                       <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                     </configuration>
+                   </execution>
+                 </executions>
+               </plugin>
+        </plugins>
 
+    </build>
+-->
     <dependencies>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -24,6 +46,24 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-ehcache</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>net.sf.ehcache</groupId>-->
+            <!--<artifactId>ehcache</artifactId>-->
+            <!--<type>pom</type>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>net.sf.ehcache</groupId>-->
+            <!--<artifactId>ehcache-core</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>mysql</groupId>

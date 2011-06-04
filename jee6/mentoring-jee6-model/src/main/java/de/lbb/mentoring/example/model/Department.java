@@ -1,26 +1,22 @@
 package de.lbb.mentoring.example.model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Department
+public class Department extends AbstractEntity
 {
-    @Id
-    @GeneratedValue
-    private Long id;
-
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<Employee> employees;
 
-    @Version
-    private Long version;
-
-    public Long getId() {
-        return id;
-    }
+    /**
+     * to be JPA conform
+     */
+    public Department() {}
 
     public String getName() {
         return name;
