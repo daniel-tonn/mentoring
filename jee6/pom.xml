@@ -23,9 +23,6 @@
                     <configuration>
                         <source>1.6</source>
                         <target>1.6</target>
-                        <!--<compilerArguments>-->
-                        <!--<processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>-->
-                        <!--</compilerArguments>-->
                     </configuration>
                 </plugin>
             </plugins>
