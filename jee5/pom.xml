@@ -80,6 +80,7 @@
 
     <modules>
         <module>mentoring-jee5-model</module>
+        <module>mentoring-jee5-ejb</module>
 
     </modules>
 </project>
