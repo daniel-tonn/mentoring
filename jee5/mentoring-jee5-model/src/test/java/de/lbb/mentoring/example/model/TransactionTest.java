@@ -14,6 +14,19 @@ public class TransactionTest extends AbstractEntityTest
     /**
      * Try with different ISOLATIONLEVELs ... have a look into persistence.xml under tests
      * property: hibernate.connection.isolation
+     *
+     * BEWARE: If you want to check actual db insertions with f.i. MySQL you have to set the isolation
+     * level on the db browser/shell aswell
+     *
+     * For MySQL this is done the following way:
+     *
+     *  SET [GLOBAL | SESSION] TRANSACTION ISOLATION LEVEL
+     *  {
+     *      READ UNCOMMITTED
+     *    | READ COMMITTED
+     *    | REPEATABLE READ
+     *    | SERIALIZABLE
+     *   }
      */
     @Test
     public void testIsolationLevel()

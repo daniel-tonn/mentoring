@@ -10,7 +10,7 @@ public class Department extends AbstractEntity
 {
     private String name;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "department") //, cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     /**

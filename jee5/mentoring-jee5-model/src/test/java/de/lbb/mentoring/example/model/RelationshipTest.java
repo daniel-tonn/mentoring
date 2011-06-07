@@ -41,7 +41,7 @@ public class RelationshipTest extends AbstractEntityTest
 
 
         // Reloading the department
-        // department know nothing about its employees
+        // department knows nothing about its employees
         Department reloadedDepartment = em.find(Department.class, department.getId()) ;
         Assert.assertNull(reloadedDepartment.getEmployees());
 
@@ -49,7 +49,7 @@ public class RelationshipTest extends AbstractEntityTest
         EntityManager otherEM = emf.createEntityManager();
         reloadedDepartment = otherEM.find(Department.class, department.getId()) ;
         Assert.assertNotNull(reloadedDepartment.getEmployees());
-
+        Assert.assertEquals(1, reloadedDepartment.getEmployees().size());
     }
 
     /**
@@ -78,16 +78,10 @@ public class RelationshipTest extends AbstractEntityTest
         Department reloadedDepartment = em.find(Department.class, department.getId());
         Assert.assertNotNull(reloadedDepartment.getEmployees());
         Assert.assertEquals(1, reloadedDepartment.getEmployees().size());
-        em.close();
 
         // loading the Department from a new EM
         EntityManager otherEM = emf.createEntityManager();
         reloadedDepartment = otherEM.find(Department.class, department.getId());
         Assert.assertEquals(0, reloadedDepartment.getEmployees().size());
-
-        // ... but employees are persisted !
-        Query query = otherEM.createQuery("from Employee");
-        Assert.assertEquals(1, query.getResultList().size());
-
     }
 }

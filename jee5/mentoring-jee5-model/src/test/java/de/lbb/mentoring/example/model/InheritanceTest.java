@@ -11,7 +11,9 @@ public class InheritanceTest extends AbstractEntityTest
 {
 
     /**
-     * Showing equality problem when loading same entity from different em
+     * Trying to reproduce Hibernate proxies and instanceof problem ...
+     *
+     * ... was not able to reproduce this issue ....
      */
     @Test
     public void testEmployeeInheritance()
