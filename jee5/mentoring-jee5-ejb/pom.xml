@@ -16,6 +16,24 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
+        <dependency>
+          <groupId>de.lbb.mentoring</groupId>
+          <artifactId>mentoring-jee5-model</artifactId>
+          <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+          <groupId>org.jboss.jbossas</groupId>
+          <artifactId>jboss-as-client</artifactId>
+          <version>6.0.0.Final</version>
+          <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 

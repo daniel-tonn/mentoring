@@ -1,6 +1,7 @@
 package de.lbb.mentoring.example.model;
 
 import de.lbb.mentoring.example.model.testdatabuilder.DepartmentBuilder;
+import de.lbb.mentoring.example.model.testdatabuilder.InsuranceBuilder;
 import de.lbb.mentoring.example.model.testdatabuilder.PartTimeEmployeeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,22 +12,17 @@ import javax.persistence.Query;
 /**
  * Tests for trying to reproduce hibernate proxy generation and the instanceof problem with it.
  *
- * (Un)fortunatly this behavior is not reproducable any more ...
  */
 public class HibernateProxyTest extends AbstractEntityTest
 {
     @Test
-    public void testHibernateProxy()
+    public void testHibernateNoProxygeneration()
     {
         Employee employee = new PartTimeEmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
-        // saving Employee
-        em.getTransaction().begin();
-        em.persist(employee);
-        em.getTransaction().commit();
-
-        // Creating Department
         Department department = new DepartmentBuilder().withName("Abteilung 1").build();
         employee.setDepartment(department);
+
+        // saving Employee
         em.getTransaction().begin();
         em.persist(employee);
         em.getTransaction().commit();
@@ -42,26 +38,24 @@ public class HibernateProxyTest extends AbstractEntityTest
 
     }
 
-
     @Test
-    public void testHibernateProxy2()
+    public void testHibernateProxyGeneration()
     {
         Employee employee = new PartTimeEmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
-        // saving Employee
+        Insurance insurance = new InsuranceBuilder().build();
+        insurance.setEmployee(employee);
+        // saving
         em.getTransaction().begin();
-        em.persist(employee);
+        em.persist(insurance);
         em.getTransaction().commit();
-        em.close();
 
-        // loading Employee from new EM
+        // loading Insurance from new EM
         EntityManager otherEM = emf.createEntityManager();
-        Query query = otherEM.createQuery("select e from Employee e where e.id = :id");
-        query.setParameter("id", employee.getId());
-        AbstractEntity reloadedEmployee = (AbstractEntity) query.getSingleResult();
+        Insurance reloadedInsurance = otherEM.find(Insurance.class, insurance.getId());
 
-        Assert.assertNotNull(reloadedEmployee);
-        Assert.assertTrue(reloadedEmployee instanceof Employee);
-        Assert.assertTrue(reloadedEmployee instanceof ParttimeEmployee);
+        // Since reloadedEmployee is proxied from Hibernate, the following instanceof
+        // fails
+        Assert.assertFalse(reloadedInsurance.getEmployee() instanceof ParttimeEmployee);
 
     }
 

@@ -8,6 +8,7 @@
         <class>de.lbb.mentoring.example.model.Employee</class>
         <class>de.lbb.mentoring.example.model.Department</class>
         <class>de.lbb.mentoring.example.model.ParttimeEmployee</class>
+        <class>de.lbb.mentoring.example.model.Insurance</class>
 
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
@@ -30,6 +31,7 @@
         <class>de.lbb.mentoring.example.model.Employee</class>
         <class>de.lbb.mentoring.example.model.Department</class>
         <class>de.lbb.mentoring.example.model.ParttimeEmployee</class>
+        <class>de.lbb.mentoring.example.model.Insurance</class>
 
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

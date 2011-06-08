@@ -2,7 +2,9 @@ package de.lbb.mentoring.example.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Requirements for a JPA-Entity from the spec:
