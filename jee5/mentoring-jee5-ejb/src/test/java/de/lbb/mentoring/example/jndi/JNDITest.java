@@ -23,7 +23,7 @@ public class JNDITest
      *
      * @throws NamingException .
      */
-    @Test
+    //@Test
     public void testJNDI() throws NamingException {
 
         Context ctx = new InitialContext();
@@ -36,7 +36,7 @@ public class JNDITest
      * Setting and reading some object from jndi context
      * @throws NamingException .
      */
-    @Test
+    //@Test
     public void testJNDI2() throws NamingException {
 
         Context ctx = new InitialContext();

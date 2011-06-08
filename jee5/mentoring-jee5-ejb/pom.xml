@@ -17,18 +17,26 @@
 
     <dependencies>
         <dependency>
-          <groupId>de.lbb.mentoring</groupId>
-          <artifactId>mentoring-jee5-model</artifactId>
-          <version>1.0-SNAPSHOT</version>
+            <groupId>de.lbb.mentoring</groupId>
+            <artifactId>mentoring-jee5-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
+
+        <!--<dependency>-->
+        <!--<groupId>org.jboss.jbossas</groupId>-->
+        <!--<artifactId>jboss-as-profileservice-client</artifactId>-->
+        <!--<version>6.0.0.Final</version>-->
+        <!--<type>pom</type>-->
+        <!--<scope>test</scope>-->
+        <!--</dependency>-->
 
         <dependency>
-          <groupId>org.jboss.jbossas</groupId>
-          <artifactId>jboss-as-client</artifactId>
-          <version>6.0.0.Final</version>
-          <type>pom</type>
+            <groupId>org.jboss.naming</groupId>
+            <artifactId>jnp-client</artifactId>
+            <version>5.0.1.GA</version>
         </dependency>
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
