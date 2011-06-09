@@ -80,4 +80,43 @@ public class FlushModeTest extends AbstractEntityTest
         session.flush();
         em.getTransaction().commit();
     }
+
+    /**
+     * Showing how the Hibernate Manual flushmode can override commit
+     */
+    @Test
+    public void testHibernateManualFlushmodeAndCommit()
+    {
+        // Using a builder for Entities to test
+        Employee employee = new EmployeeBuilder().withAge(30).withName("Hans").withSurename("Mueller").build();
+
+        // saving Employee
+        em.getTransaction().begin();
+        em.persist(employee);
+        em.getTransaction().commit();
+
+
+        // Now we are setting flushmode to Hibernate-MANUAL
+        Session session = (Session) em.getDelegate();
+        session.setFlushMode(FlushMode.MANUAL);
+        em.getTransaction().begin();
+        // Changing age of Employee
+        employee.setAge(41);
+
+        // explicit do not flush, but commit
+        em.getTransaction().commit();
+
+        // Doing a query for Employees under 40
+        EntityManager newEM = emf.createEntityManager();
+        Query query = newEM.createQuery("select e from Employee e where e.age < 40");
+
+        // Since we have not flushed the changed Employee is missing in the database
+        List result = query.getResultList();
+
+        // One Employee under 40 has been found, which is true
+        // Our changes in the last transaction have not been materialized into the DB
+        Assert.assertEquals(1, result.size());
+        Employee reloadedEmployee = (Employee) result.get(0);
+        Assert.assertEquals(30, reloadedEmployee.getAge());
+    }
 }
